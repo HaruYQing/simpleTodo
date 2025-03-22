@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.container {
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+  .sidebar-container {
+    width: 20%;
+    min-width: 200px;
+    max-width: 300px;
+    .sidebar-content {
+      margin: 1rem;
+      p {
+        display: flex;
+        width: 100%;
+        align-items: center;
+      }
+    }
+  }
+  .main-container {
+    overflow: auto;
+  }
+}

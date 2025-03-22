@@ -1,0 +1,17 @@
+<mat-drawer-container class="container">
+  <mat-drawer mode="side" [opened]="sidebarService.isOpened" class="sidebar-container">
+    <div class="sidebar-content">
+      <p>
+        <span class="flex-spacer">Actions</span>
+        <button mat-icon-button (click)="sidebarService.toggle()">
+          <mat-icon>
+            keyboard_double_arrow_left
+          </mat-icon>
+        </button>
+      </p>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="main-container">
+    <ng-content />
+  </mat-drawer-content>
+</mat-drawer-container>
