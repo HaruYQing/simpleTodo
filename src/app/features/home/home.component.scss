@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin: 2rem 4rem;
+  align-items: center;
+}
+
+.action-area {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: end;
+}
