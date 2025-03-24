@@ -1,1 +1,55 @@
-<p>task-card works!</p>
+<mat-card class="task-card">
+
+  <mat-card-header class="task-header">
+    <mat-card-title-group>
+      <mat-card-title>
+        <div class="title-flex">
+          <span>{{task().title}}</span>
+          <mat-chip-set>
+            <mat-chip>{{task().category}}</mat-chip>
+          </mat-chip-set>
+
+        </div>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <small>{{task().dueDate}}</small>
+      </mat-card-subtitle>
+    </mat-card-title-group>
+
+    <div class="title-icons">
+      <button mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content class="task-content">
+    <p>{{task().description}}</p>
+  </mat-card-content>
+
+  <mat-card-actions align="end" class="task-action">
+    @if(task().status === 'inProgress') {
+    <button mat-stroked-button [color]="task().status==='complete' ? 'primary' : 'basic'" (click)="onChangeStatus({taskId: task().id, status:'complete'})">
+      <mat-icon>{{task().status==='complete' ? 'task_alt':'radio_button_unchecked'}}</mat-icon>
+      Complete
+    </button>
+    <button mat-flat-button (click)="onChangeStatus({taskId: task().id, status: 'pending'})">Pending</button>
+    } @else {
+    @if (task().status === 'pending') {
+    <button mat-stroked-button [color]="task().status==='inProgress' ? 'primary' : 'basic'" (click)="onChangeStatus({taskId: task().id, status:'inProgress'})">
+      <mat-icon>{{task().status==='inProgress' ? 'radio_button_unchecked':'run_circle'}}</mat-icon>
+      In Progress
+    </button>
+    } @else {
+    <button mat-stroked-button (click)="onDelete(task().id)">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+    }
+    }
+  </mat-card-actions>
+
+</mat-card>

@@ -1,8 +1,12 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>My To-Do List</mat-card-title>
+    <mat-card-title>
+      <h1 class="list-title">My To-Do List</h1>
+    </mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-
+  <mat-card-content class="cards-container">
+    @for(task of demoTasks(); track task.id) {
+    <app-task-card [task]="task" />
+    }
   </mat-card-content>
 </mat-card>
