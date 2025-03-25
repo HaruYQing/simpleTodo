@@ -5,7 +5,9 @@
         <div class="title-flex">
           <span>{{ task().title }}</span>
           <mat-chip-set>
-            <mat-chip>{{ task().category }}</mat-chip>
+            <mat-chip>{{
+              task().category === "personal" ? "Personal" : "Work"
+            }}</mat-chip>
           </mat-chip-set>
         </div>
       </mat-card-title>
