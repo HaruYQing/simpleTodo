@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Task, TaskStatus } from './task-card/task.model';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
-  DummyTasks: Task[] = [
+  private DummyTasks = signal<Task[]>([
     {
       id: '1',
       title: 'Buy groceries',
@@ -36,10 +36,12 @@ export class TasksService {
       description: 'Submit to the manager.',
       status: 'inProgress',
     },
-  ];
+  ]);
+
+  allTasks = this.DummyTasks.asReadonly();
 
   setTaskStatus(taskId: string, status: TaskStatus) {
-    const task = this.DummyTasks.find((task) => task.id === taskId);
+    const task = this.DummyTasks().find((task) => task.id === taskId);
     if (task) {
       task.status = status;
     }

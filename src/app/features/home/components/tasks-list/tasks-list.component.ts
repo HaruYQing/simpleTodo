@@ -12,5 +12,5 @@ import { TasksService } from '../tasks-list.service';
 })
 export class TasksListComponent {
   private tasksService = inject(TasksService);
-  demoTasks = computed(() => this.tasksService.DummyTasks);
+  demoTasks = this.tasksService.allTasks;
 }
