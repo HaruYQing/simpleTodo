@@ -38,10 +38,29 @@ export class TasksService {
     },
   ];
 
+  filterdTasks!: Task[];
+
   setTaskStatus(taskId: string, status: TaskStatus) {
     const task = this.DummyTasks.find((task) => task.id === taskId);
     if (task) {
       task.status = status;
+    }
+  }
+
+  getTasksByStatus(status: TaskStatus | 'all') {
+    // const filterdTasks = this.DummyTasks.filter((task) => {
+    //   if (status === 'all') {
+    //     return task;
+    //   } else {
+    //     return task.status === status;
+    //   }
+    // });
+    const filterdTasks = this.DummyTasks.filter(
+      (task) => task.status === status
+    );
+
+    if (filterdTasks) {
+      this.filterdTasks = filterdTasks;
     }
   }
 }
