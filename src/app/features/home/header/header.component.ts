@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TaskStatus } from '../components/task-card/task.model';
 import { TasksService } from '../components/tasks-list.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { UIStateService } from '../uistate.service';
 
 @Component({
   selector: 'app-header',
@@ -22,10 +23,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 })
 export class HeaderComponent {
   private tasksService = inject(TasksService);
+  private uiStateService = inject(UIStateService);
 
   // constructor(private matDialog: MatDialog) {}
 
   onChangeTaskFilter(filter: 'all' | TaskStatus) {
     this.tasksService.selectedFilter.set(filter);
+  }
+
+  onOpenAddTask() {
+    console.log('OPEN~');
+    this.uiStateService.onOpen();
   }
 }

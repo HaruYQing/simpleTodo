@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { TasksService } from '../tasks-list.service';
 import { TaskCategory, TaskInputData } from '../task-card/task.model';
+import { UIStateService } from '../../uistate.service';
 
 @Component({
   selector: 'app-add-task',
@@ -37,6 +38,7 @@ import { TaskCategory, TaskInputData } from '../task-card/task.model';
 export class AddTaskComponent {
   private formElement = viewChild<ElementRef<HTMLFormElement>>('form');
   private tasksService = inject(TasksService);
+  private uiStateService = inject(UIStateService);
 
   enteredDate: Date | null = null;
 
@@ -54,5 +56,11 @@ export class AddTaskComponent {
   onSubmit() {
     this.tasksService.addTask(this.taskData);
     this.formElement()?.nativeElement.reset();
+    this.uiStateService.onClose();
+  }
+
+  onCancel() {
+    this.formElement()?.nativeElement.reset();
+    this.uiStateService.onClose();
   }
 }
