@@ -4,20 +4,25 @@
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
-        <input matInput required class="wide-input" />
+        <input matInput required name="title" [(ngModel)]="taskData.title" />
       </mat-form-field>
     </p>
 
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
-        <textarea matInput required></textarea>
+        <textarea
+          matInput
+          required
+          name="description"
+          [(ngModel)]="taskData.description"
+        ></textarea>
       </mat-form-field>
     </p>
 
     <p>
       <label>Category: </label>
-      <mat-radio-group required>
+      <mat-radio-group required name="category" [(ngModel)]="taskData.category">
         <mat-radio-button value="personal">Personal</mat-radio-button>
         <mat-radio-button value="work">Work</mat-radio-button>
       </mat-radio-group>
@@ -27,7 +32,14 @@
       <!-- TODO: validation of no prev date allowed -->
       <mat-form-field appearance="outline">
         <mat-label>Due Date</mat-label>
-        <input matInput required [matDatepicker]="datepicker" />
+        <input
+          matInput
+          required
+          [matDatepicker]="datepicker"
+          name="dueDate"
+          [(ngModel)]="enteredDate"
+          (ngModelChange)="onDateChange($event)"
+        />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
           matIconSuffix
