@@ -5,6 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TaskStatus } from '../components/task-card/task.model';
 import { TasksService } from '../components/tasks-list.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,15 @@ import { TasksService } from '../components/tasks-list.service';
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   private tasksService = inject(TasksService);
+
+  // constructor(private matDialog: MatDialog) {}
 
   onChangeTaskFilter(filter: 'all' | TaskStatus) {
     this.tasksService.selectedFilter.set(filter);
