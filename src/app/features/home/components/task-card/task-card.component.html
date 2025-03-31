@@ -20,7 +20,7 @@
       <button mat-icon-button>
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="onDelete(task().id)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>

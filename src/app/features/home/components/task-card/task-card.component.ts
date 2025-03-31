@@ -5,6 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Task, TaskStatus } from './task.model';
 import { TasksService } from '../tasks-list.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-card',
@@ -15,14 +20,26 @@ import { TasksService } from '../tasks-list.service';
 })
 export class TaskCardComponent {
   task = input.required<Task>();
+  // horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  // verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  private taskService = inject(TasksService);
+  private tasksService = inject(TasksService);
+  private _snackBar = inject(MatSnackBar);
 
   onChangeStatus({ taskId, status }: { taskId: string; status: TaskStatus }) {
-    this.taskService.updateTaskStatus(taskId, status);
+    this.tasksService.updateTaskStatus(taskId, status);
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Task removed', 'OK', {
+      // horizontalPosition: this.horizontalPosition,
+      // verticalPosition: this.verticalPosition,
+      duration: 2000,
+    });
   }
 
   onDelete(taskId: string) {
-    alert('Delete task with ID: ' + taskId);
+    this.tasksService.deleteTask(taskId);
+    this.openSnackBar();
   }
 }

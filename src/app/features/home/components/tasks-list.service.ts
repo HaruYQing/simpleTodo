@@ -58,4 +58,8 @@ export class TasksService {
       )
     );
   }
+
+  deleteTask(taskId: string) {
+    this.DummyTasks.update((prev) => prev.filter((task) => task.id !== taskId));
+  }
 }

@@ -2,7 +2,6 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { TasksService } from '../tasks-list.service';
-import { TaskStatus } from '../task-card/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -13,6 +12,7 @@ import { TaskStatus } from '../task-card/task.model';
 })
 export class TasksListComponent {
   private tasksService = inject(TasksService);
+
   demoTasks = computed(() => {
     switch (this.tasksService.selectedFilter()) {
       case 'all':
