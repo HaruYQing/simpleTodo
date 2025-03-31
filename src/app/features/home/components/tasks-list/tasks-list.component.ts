@@ -1,7 +1,8 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { TasksService } from '../tasks-list.service';
+import { TaskStatus } from '../task-card/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -12,5 +13,24 @@ import { TasksService } from '../tasks-list.service';
 })
 export class TasksListComponent {
   private tasksService = inject(TasksService);
-  demoTasks = this.tasksService.allTasks;
+  demoTasks = computed(() => {
+    switch (this.tasksService.selectedFilter()) {
+      case 'all':
+        return this.tasksService.allTasks();
+      case 'inProgress':
+        return this.tasksService
+          .allTasks()
+          .filter((task) => task.status === 'inProgress');
+      case 'pending':
+        return this.tasksService
+          .allTasks()
+          .filter((task) => task.status === 'pending');
+      case 'completed':
+        return this.tasksService
+          .allTasks()
+          .filter((task) => task.status === 'completed');
+      default:
+        return this.tasksService.allTasks();
+    }
+  });
 }

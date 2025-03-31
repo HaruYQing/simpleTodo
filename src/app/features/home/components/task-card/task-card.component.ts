@@ -19,7 +19,7 @@ export class TaskCardComponent {
   private taskService = inject(TasksService);
 
   onChangeStatus({ taskId, status }: { taskId: string; status: TaskStatus }) {
-    this.taskService.setTaskStatus(taskId, status);
+    this.taskService.updateTaskStatus(taskId, status);
   }
 
   onDelete(taskId: string) {

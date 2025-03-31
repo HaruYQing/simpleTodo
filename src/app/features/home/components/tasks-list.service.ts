@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { Task, TaskStatus } from './task-card/task.model';
+import { Task, TaskInputData, TaskStatus } from './task-card/task.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
@@ -26,7 +27,7 @@ export class TasksService {
       category: 'personal',
       dueDate: '2025-03-14',
       description: 'Tell her that I sent a gift.',
-      status: 'complete',
+      status: 'completed',
     },
     {
       id: '4',
@@ -38,12 +39,23 @@ export class TasksService {
     },
   ]);
 
+  selectedFilter = signal<'all' | TaskStatus>('all');
   allTasks = this.DummyTasks.asReadonly();
 
-  setTaskStatus(taskId: string, status: TaskStatus) {
-    const task = this.DummyTasks().find((task) => task.id === taskId);
-    if (task) {
-      task.status = status;
-    }
+  addTask(taskData: TaskInputData) {
+    const newTask: Task = {
+      ...taskData,
+      id: uuidv4(),
+      status: 'inProgress',
+    };
+    this.DummyTasks.update((prev) => [...prev, newTask]);
+  }
+
+  updateTaskStatus(taskId: string, newStatus: TaskStatus) {
+    this.DummyTasks.update((prev) =>
+      prev.map((task) =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
   }
 }

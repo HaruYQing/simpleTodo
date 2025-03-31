@@ -34,11 +34,11 @@
     @if(task().status === 'inProgress') {
     <button
       mat-stroked-button
-      [color]="task().status === 'complete' ? 'primary' : 'basic'"
-      (click)="onChangeStatus({ taskId: task().id, status: 'complete' })"
+      [color]="task().status === 'completed' ? 'primary' : 'basic'"
+      (click)="onChangeStatus({ taskId: task().id, status: 'completed' })"
     >
       <mat-icon>{{
-        task().status === "complete" ? "task_alt" : "radio_button_unchecked"
+        task().status === "completed" ? "task_alt" : "radio_button_unchecked"
       }}</mat-icon>
       Complete
     </button>
