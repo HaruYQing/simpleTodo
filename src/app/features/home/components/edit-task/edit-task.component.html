@@ -1,0 +1,66 @@
+<div class="dialog-container">
+  <h2 mat-dialog-title>Edit Task</h2>
+  <form (ngSubmit)="onSave()">
+    <mat-dialog-content>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput required name="title" [value]="data.title" />
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            required
+            name="description"
+            [value]="data.description"
+          ></textarea>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <label>Category: </label>
+        <mat-radio-group required name="category" [value]="data.category">
+          <mat-radio-button value="personal">Personal</mat-radio-button>
+          <mat-radio-button value="work">Work</mat-radio-button>
+        </mat-radio-group>
+      </p>
+
+      <P>
+        <!-- TODO: validation of no prev date allowed -->
+        <mat-form-field appearance="outline">
+          <mat-label>Due Date</mat-label>
+          <input
+            matInput
+            required
+            [matDatepicker]="datepicker"
+            name="dueDate"
+            [value]="data.dueDate"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="datepicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Apply
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </P>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="accent" type="submit">
+        Save Changes
+      </button>
+      <button mat-button mat-dialog-close type="reset">Cancel</button>
+    </mat-dialog-actions>
+  </form>
+</div>

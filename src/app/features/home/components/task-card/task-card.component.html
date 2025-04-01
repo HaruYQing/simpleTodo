@@ -17,7 +17,7 @@
     </mat-card-title-group>
 
     <div class="title-icons">
-      <button mat-icon-button>
+      <button mat-icon-button (click)="onStartEdit(task().id)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button (click)="onDelete(task().id)">
